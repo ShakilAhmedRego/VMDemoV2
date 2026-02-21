@@ -1,4 +1,3 @@
-```tsx
 'use client'
 
 import { useState } from 'react'
@@ -43,28 +42,33 @@ export default function CreatorIntelDashboard({ verticalKey }: { verticalKey: st
     ? (rows.reduce((s, r) => s + (Number(r.engagement_rate) || 0), 0) / rows.length).toFixed(2)
     : '0'
 
-  // ✅ SAFE COUNTER (no reduce casting)
   const platformCounts: Record<string, number> = {}
   for (const r of rows) {
     const p = String(r.primary_platform ?? 'other').toLowerCase()
     platformCounts[p] = (platformCounts[p] || 0) + 1
   }
+
   const platformData = Object.entries(platformCounts).map(([name, count]) => ({ name, count }))
 
-  // ✅ SAFE SET TO ARRAY
   const selectedArr = Array.from(selectedIds)
   const newIds = selectedArr.filter(id => !unlockedIds.has(id))
   const drawerId = drawerRow ? String(drawerRow.id) : null
   const drawerUnlocked = drawerId ? unlockedIds.has(drawerId) : false
 
-  if (loading) return <div className="p-6 text-gray-400 text-sm">Loading creator intelligence…</div>
+  if (loading) {
+    return <div className="p-6 text-gray-400 text-sm">Loading creator intelligence…</div>
+  }
 
   return (
     <div className="p-6 space-y-5">
       <KPIRow>
         <KPICard
           label="Total Followers"
-          value={totalFollowers >= 1e6 ? `${(totalFollowers / 1e6).toFixed(1)}M` : totalFollowers.toLocaleString()}
+          value={
+            totalFollowers >= 1e6
+              ? `${(totalFollowers / 1e6).toFixed(1)}M`
+              : totalFollowers.toLocaleString()
+          }
           icon="👥"
           sub="Combined audience reach"
           trend="up"
@@ -76,7 +80,10 @@ export default function CreatorIntelDashboard({ verticalKey }: { verticalKey: st
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl p-4">
-          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3">Platform Breakdown</h3>
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3">
+            Platform Breakdown
+          </h3>
+
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={platformData} layout="vertical">
               <XAxis type="number" tick={{ fontSize: 9 }} />
@@ -93,7 +100,9 @@ export default function CreatorIntelDashboard({ verticalKey }: { verticalKey: st
 
         <div className="lg:col-span-2 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 border-b border-gray-50 dark:border-gray-800">
-            <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">Creators</h3>
+            <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+              Creators
+            </h3>
             <button
               onClick={rows.length === selectedIds.size ? clearSelection : selectAll}
               className="text-xs text-pink-600"
@@ -176,7 +185,9 @@ export default function CreatorIntelDashboard({ verticalKey }: { verticalKey: st
                       </td>
 
                       <td className="px-3 py-2.5 text-right text-xs font-semibold text-pink-600 dark:text-pink-400">
-                        {row.engagement_rate ? `${Number(row.engagement_rate).toFixed(2)}%` : '—'}
+                        {row.engagement_rate
+                          ? `${Number(row.engagement_rate).toFixed(2)}%`
+                          : '—'}
                       </td>
 
                       <td className="px-3 py-2.5">
@@ -252,4 +263,3 @@ export default function CreatorIntelDashboard({ verticalKey }: { verticalKey: st
     </div>
   )
 }
-```
