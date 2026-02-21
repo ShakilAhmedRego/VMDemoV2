@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --surface: #f8f9fa;
+  --border: #e5e7eb;
+  --accent: #2563eb;
+}
+
+.dark {
+  --background: #0a0a0f;
+  --foreground: #f0f0f5;
+  --surface: #12121a;
+  --border: #1f1f2e;
+  --accent: #3b82f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* Drawer animations */
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-slide-in-right { animation: slideInRight 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-fade-in { animation: fadeIn 0.2s ease; }
+.animate-slide-down { animation: slideDown 0.2s ease; }
+
+/* Vertical accent themes */
+.accent-dealflow { --v-accent: #2563eb; --v-accent-light: #eff6ff; --v-accent-dark: #1e40af; }
+.accent-salesintel { --v-accent: #16a34a; --v-accent-light: #f0fdf4; --v-accent-dark: #15803d; }
+.accent-supplyintel { --v-accent: #dc2626; --v-accent-light: #fef2f2; --v-accent-dark: #b91c1c; }
+.accent-clinicalintel { --v-accent: #0891b2; --v-accent-light: #ecfeff; --v-accent-dark: #0e7490; }
+.accent-legalintel { --v-accent: #7c3aed; --v-accent-light: #f5f3ff; --v-accent-dark: #6d28d9; }
+.accent-marketresearch { --v-accent: #ea580c; --v-accent-light: #fff7ed; --v-accent-dark: #c2410c; }
+.accent-academicintel { --v-accent: #0284c7; --v-accent-light: #f0f9ff; --v-accent-dark: #0369a1; }
+.accent-creatorintel { --v-accent: #db2777; --v-accent-light: #fdf2f8; --v-accent-dark: #be185d; }
+.accent-gamingintel { --v-accent: #9333ea; --v-accent-light: #faf5ff; --v-accent-dark: #7e22ce; }
+.accent-realestateintel { --v-accent: #0d9488; --v-accent-light: #f0fdfa; --v-accent-dark: #0f766e; }
+.accent-privatecreditintel { --v-accent: #b45309; --v-accent-light: #fffbeb; --v-accent-dark: #92400e; }
+.accent-cyberintel { --v-accent: #059669; --v-accent-light: #ecfdf5; --v-accent-dark: #047857; }
+.accent-biopharmintel { --v-accent: #4f46e5; --v-accent-light: #eef2ff; --v-accent-dark: #4338ca; }
+.accent-industrialintel { --v-accent: #d97706; --v-accent-light: #fffbeb; --v-accent-dark: #b45309; }
+.accent-govintel { --v-accent: #1d4ed8; --v-accent-light: #eff6ff; --v-accent-dark: #1e3a8a; }
+.accent-insuranceintel { --v-accent: #0f766e; --v-accent-light: #f0fdfa; --v-accent-dark: #115e59; }
+
+.v-accent { color: var(--v-accent); }
+.v-accent-bg { background-color: var(--v-accent); }
+.v-accent-light-bg { background-color: var(--v-accent-light); }
+.v-accent-border { border-color: var(--v-accent); }
+
+/* Lock blur */
+.locked-field {
+  filter: blur(4px);
+  user-select: none;
+  pointer-events: none;
+}
